@@ -5,8 +5,6 @@ import App from './App'
 import '../src/assets/iconfont/iconfont.css'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 )
