@@ -10,8 +10,36 @@ import {
   NavSearch,
   Addition,
   Button,
-  SearchWrapper
+  SearchWrapper,
+  SearchInfo,
+  SearchInfoTitle,
+  SearchInfoSwitch,
+  SearchInfoItem,
+  SearchInfoList
 } from './style'
+
+const getListArea = visible => {
+  if (visible) {
+    return (
+      <SearchInfo>
+        <SearchInfoTitle>
+          热门搜索
+          <SearchInfoSwitch>换一批</SearchInfoSwitch>
+        </SearchInfoTitle>
+        <SearchInfoList>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+        </SearchInfoList>
+      </SearchInfo>
+    )
+  } else {
+    return null
+  }
+}
 
 const Header = props => {
   return (
@@ -25,11 +53,7 @@ const Header = props => {
           <i className='iconfont iconsetting' />
         </NavItem>
         <SearchWrapper>
-          <CSSTransition
-            timeout={200}
-            in={props.isFocus}
-            classNames='slide'
-          >
+          <CSSTransition timeout={200} in={props.isFocus} classNames='slide'>
             <NavSearch
               className={props.isFocus ? 'focused' : ''}
               onFocus={props.handleSearchFocus}
@@ -43,6 +67,7 @@ const Header = props => {
                 : 'iconfont iconsearch'
             }
           />
+          { getListArea(props.isFocus) }
         </SearchWrapper>
       </Nav>
       <Addition>
