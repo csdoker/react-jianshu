@@ -7,16 +7,16 @@ const defaultState = fromJS({
 })
 
 const reducer = (state = defaultState, action) => {
-  if (action.type === constants.SEARCH_FOCUS) {
-    return state.set('isFocus', true)
+  switch (action.type) {
+    case constants.SEARCH_FOCUS:
+      return state.set('isFocus', true)
+    case constants.SEARCH_BLUR:
+      return state.set('isFocus', false)
+    case constants.CHANGE_LIST:
+      return state.set('list', action.data)
+    default:
+      return state
   }
-  if (action.type === constants.SEARCH_BLUR) {
-    return state.set('isFocus', false)
-  }
-  if (action.type === constants.CHANGE_LIST) {
-    return state.set('list', action.data)
-  }
-  return state
 }
 
 export default reducer
