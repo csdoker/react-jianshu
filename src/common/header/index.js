@@ -57,7 +57,7 @@ const Header = props => {
 
 const mapStateToProps = state => {
   return {
-    isFocus: state.isFocus
+    isFocus: state.header.isFocus
   }
 }
 
