@@ -20,20 +20,25 @@ import {
 
 class Header extends Component {
   getListArea () {
-    const { isFocus, list } = this.props
-    if (isFocus) {
+    const { isFocus, list, page, totalPage, isMouseIn, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props
+    const newList = list.toJS()
+    const pageList = []
+    if (newList.length) {
+      for (let index = (page - 1) * 10; index < page * 10; index++) {
+        pageList.push(
+          <SearchInfoItem key={newList[index]}>{newList[index]}</SearchInfoItem>
+        )
+      }
+    }
+    if (isFocus || isMouseIn) {
       return (
-        <SearchInfo>
+        <SearchInfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+            <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage)}>换一批</SearchInfoSwitch>
           </SearchInfoTitle>
           <SearchInfoList>
-            {
-              list.map(item => {
-                return <SearchInfoItem key={item}>{item}</SearchInfoItem>
-              })
-            }
+            {pageList}
           </SearchInfoList>
         </SearchInfo>
       )
@@ -87,7 +92,10 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     isFocus: state.getIn(['header', 'isFocus']),
-    list: state.getIn(['header', 'list'])
+    list: state.getIn(['header', 'list']),
+    page: state.getIn(['header', 'page']),
+    totalPage: state.getIn(['header', 'totalPage']),
+    isMouseIn: state.getIn(['header', 'isMouseIn'])
   }
 }
 
@@ -99,6 +107,19 @@ const mapDispatchToProps = dispatch => {
     },
     handleSearchBlur () {
       dispatch(actionCreators.searchBlur())
+    },
+    handleMouseEnter () {
+      dispatch(actionCreators.searchMouseEnter())
+    },
+    handleMouseLeave () {
+      dispatch(actionCreators.searchMouseLeave())
+    },
+    handleChangePage (page, totalPage) {
+      if (page < totalPage) {
+        dispatch(actionCreators.changePage(page + 1))
+      } else {
+        dispatch(actionCreators.changePage(1))
+      }
     }
   }
 }
