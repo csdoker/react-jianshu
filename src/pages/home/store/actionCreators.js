@@ -36,3 +36,8 @@ export const getMoreList = (articlePage) => {
     })
   }
 }
+
+export const toggleTopShow = (visible) => ({
+  type: constants.TOGGLE_SCROLL_TOP,
+  visible
+})
