@@ -12,9 +12,9 @@ class App extends Component {
     return (
       <Fragment>
         <Provider store={store}>
-          <Header />
           <Router>
             <Switch>
+              <Header />
               <Route path='/' exact>
                 <Home />
               </Route>
