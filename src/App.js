@@ -18,7 +18,7 @@ class App extends Component {
               <Route path='/' exact>
                 <Home />
               </Route>
-              <Route path='/detail' exact>
+              <Route path='/detail/:id' exact>
                 <Detail />
               </Route>
             </Switch>
