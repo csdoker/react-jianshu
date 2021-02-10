@@ -13,8 +13,8 @@ class App extends Component {
       <Fragment>
         <Provider store={store}>
           <Router>
+            <Header />
             <Switch>
-              <Header />
               <Route path='/' exact>
                 <Home />
               </Route>
